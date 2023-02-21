@@ -1,16 +1,21 @@
+import { Timer } from './Timer/Timer';
+
 export const App = () => {
   return (
+    <>
     <div
       style={{
-        height: '100vh',
+        height: '30',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
         color: '#010101'
       }}
-    >
-      React homework template
+    >  
+      <p>36 000 000</p>
     </div>
+    <Timer></Timer>
+    </>
   );
 };
