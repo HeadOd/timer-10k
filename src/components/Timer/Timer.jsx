@@ -1,16 +1,16 @@
 import { useState, useRef, useEffect } from "react";
+import { PropTypes } from 'prop-types';
 
-export const Timer = () => {
-  const [count, setCount] = useState(0);
+export const Timer = ({ onClick }) => {
+  const [count, setCount] = useState(() => Number(JSON.parse(localStorage.getItem('count'))) || 0);
   const [activeBtn, setActiveBtn] = useState(true);
   const [minusBtn, setminusBtn] = useState(true);
   const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(() => addLeadingZero(0));
+  const [hours, setHours] = useState(() => addLeadingZero(0));
   let timerId = useRef(null);
 
   const startTimer = () => {
-    console.log('It`s work!');
     timerId.current = setInterval(() => { 
       setCount(prev => prev + 1)
     }, 1000);
@@ -19,20 +19,19 @@ export const Timer = () => {
   }
 
   useEffect(() => {
-    setMinutes(addLeadingZero(0));
-    setHours(addLeadingZero(0));
-
     if (count >= 3600) {
       setHours(addLeadingZero(Math.floor(count / 3600)));
       setMinutes(addLeadingZero(Math.floor((count % 3600) / 60)));
       setSeconds(addLeadingZero(Math.floor((count % 3600) % 60)));
     } else if (count >= 60) {
+      console.log('min');
       setSeconds(addLeadingZero(count % 60));
       setMinutes(addLeadingZero(Math.floor(count / 60)));
     } else if (count < 60) {
       setSeconds(addLeadingZero(count));
-    }
-    
+    }  
+
+    localStorage.setItem('count', JSON.stringify(count));
   }, [count])
 
   function addLeadingZero(value) {
@@ -40,15 +39,17 @@ export const Timer = () => {
   };
 
   const stop = () => {
-    console.log('Stop!');
     clearInterval(timerId.current);
     setActiveBtn(true);
     setminusBtn(false);
   }
 
   const minus = () => {
-    console.log(count);
+    onClick(count);
+
     setCount(0);
+    setMinutes(addLeadingZero(0));
+    setHours(addLeadingZero(0));
     setminusBtn(true);
   }
   
@@ -72,4 +73,8 @@ export const Timer = () => {
     <button type="button" disabled={activeBtn} onClick={() => stop()}>Stop</button>
     <button type="button" disabled={minusBtn} onClick={() => minus()}>Minus</button>
   </div>
+}
+
+Timer.propTypes = {
+  onClick: PropTypes.func.isRequired,
 }

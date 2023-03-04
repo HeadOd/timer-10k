@@ -1,21 +1,15 @@
 import { Timer } from './Timer/Timer';
+import { Time } from './Time/Time';
+
+import { useState } from 'react';
 
 export const App = () => {
+  const [howClose, setHowClose] = useState(0);
+
   return (
     <>
-    <div
-      style={{
-        height: '30',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >  
-      <p>36 000 000</p>
-    </div>
-    <Timer></Timer>
+    <Time count={ howClose }></Time>
+    <Timer onClick={ setHowClose }></Timer>
     </>
   );
 };
