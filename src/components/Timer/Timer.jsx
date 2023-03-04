@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 export const Timer = ({ onClick }) => {
   const [count, setCount] = useState(() => Number(JSON.parse(localStorage.getItem('count'))) || 0);
   const [activeBtn, setActiveBtn] = useState(true);
-  const [minusBtn, setminusBtn] = useState(true);
+  const [minusBtn, setminusBtn] = useState(() => Number(JSON.parse(localStorage.getItem('count'))) ? false : true);
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(() => addLeadingZero(0));
   const [hours, setHours] = useState(() => addLeadingZero(0));
