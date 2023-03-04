@@ -16,6 +16,7 @@ export const Timer = ({ onClick }) => {
     }, 1000);
 
     setActiveBtn(false);
+    setminusBtn(true);
   }
 
   useEffect(() => {
