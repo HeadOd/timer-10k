@@ -1,5 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { PropTypes } from 'prop-types';
+import { IconContext } from "react-icons";
+
+import { AiFillPlayCircle } from 'react-icons/ai';
+import { BsFillStopCircleFill } from "react-icons/bs";
+import { GiHeartMinus } from "react-icons/gi";
+import { TimerItem, Clock, BoxButton, Button, ButtonName } from './Timer.styled';
+import { Section, Container } from "../Global/Global.styled";
+import { addLeadingZero } from "../Global/addLeadingZero";
 
 export const Timer = ({ onClick }) => {
   const [count, setCount] = useState(() => Number(JSON.parse(localStorage.getItem('count'))) || 0);
@@ -25,7 +33,6 @@ export const Timer = ({ onClick }) => {
       setMinutes(addLeadingZero(Math.floor((count % 3600) / 60)));
       setSeconds(addLeadingZero(Math.floor((count % 3600) % 60)));
     } else if (count >= 60) {
-      console.log('min');
       setSeconds(addLeadingZero(count % 60));
       setMinutes(addLeadingZero(Math.floor(count / 60)));
     } else if (count < 60) {
@@ -34,10 +41,6 @@ export const Timer = ({ onClick }) => {
 
     localStorage.setItem('count', JSON.stringify(count));
   }, [count])
-
-  function addLeadingZero(value) {
-    return String(value).padStart(2, '0');
-  };
 
   const stop = () => {
     clearInterval(timerId.current);
@@ -54,26 +57,24 @@ export const Timer = ({ onClick }) => {
     setminusBtn(true);
   }
   
-  return <div>
-    <p
-      style={{
-        height: '30h',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}>
-        <span className='hours'>{hours}</span>
-        <span>:</span>
-        <span className='minutes'>{minutes}</span>
-        <span>:</span>
-        <span className='seconds'>{seconds}</span>
-    </p>
-    <button type="button" disabled={!activeBtn} onClick={() => startTimer()}>Start</button>
-    <button type="button" disabled={activeBtn} onClick={() => stop()}>Stop</button>
-    <button type="button" disabled={minusBtn} onClick={() => minus()}>Minus</button>
-  </div>
+  return <Section>
+    <Container>
+      <h2>You are closer to the goal on:</h2>
+      <ul>
+        <TimerItem><Clock>{ hours }</Clock>hours</TimerItem>
+        <TimerItem><Clock>{ minutes }</Clock>minutes</TimerItem>
+        <TimerItem><Clock>{ seconds }</Clock>seconds</TimerItem>
+      </ul>
+
+      <IconContext.Provider value={{size: '24px'}}>
+        <BoxButton>
+          <Button type="button" disabled={!activeBtn} onClick={() => startTimer()}><AiFillPlayCircle /><ButtonName>Start</ButtonName></Button>
+          <Button type="button" disabled={activeBtn} onClick={() => stop()}><BsFillStopCircleFill /><ButtonName>Stop</ButtonName></Button>
+          <Button type="button" disabled={minusBtn} onClick={() => minus()}><GiHeartMinus /><ButtonName>Minus</ButtonName></Button>
+        </BoxButton>
+      </IconContext.Provider>     
+    </Container>
+  </Section>
 }
 
 Timer.propTypes = {
