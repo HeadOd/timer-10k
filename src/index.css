@@ -13,3 +13,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html[data-theme = 'dark'] {
+  --background-color: black;
+  --color: white;
+}
+
+html[data-theme = 'light'] {
+  --background-color: white;
+  --color: black;
+}

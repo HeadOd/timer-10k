@@ -12,6 +12,9 @@ export const GlobalStyles = css`
       Cantarell, 
       "Helvetica Neue", 
       sans-serif;
+
+      background-color: var(--background-color);
+      transition: background-color 200ms linear;
   }
 
   h1,
@@ -33,12 +36,16 @@ export const GlobalStyles = css`
 
 
 export const Section = styled.section `
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   `;
 
 export const Container = styled.div `
   margin: 0 auto;
   padding: 0 15px;
   text-align: center;
+`;
+
+export const TimeColor = styled.span `
+  color: ${p => p.theme.colors.secondColorTrans}
 `;

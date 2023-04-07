@@ -35,7 +35,7 @@ export const Button = styled.button `
   box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
   background: ${p => p.theme.colors.primaryColor};
 
-  transition: 0.3s;
+  transition: ${p => p.theme.effect.primaryEffect};
 
 
 

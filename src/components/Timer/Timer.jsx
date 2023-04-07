@@ -6,7 +6,7 @@ import { AiFillPlayCircle } from 'react-icons/ai';
 import { BsFillStopCircleFill } from "react-icons/bs";
 import { GiHeartMinus } from "react-icons/gi";
 import { TimerItem, Clock, BoxButton, Button, ButtonName } from './Timer.styled';
-import { Section, Container } from "../Global/Global.styled";
+import { Section, Container, TimeColor } from "../Global/Global.styled";
 import { addLeadingZero } from "../Global/addLeadingZero";
 
 export const Timer = ({ onClick }) => {
@@ -57,13 +57,13 @@ export const Timer = ({ onClick }) => {
     setminusBtn(true);
   }
   
-  return <Section>
+  return (<Section>
     <Container>
       <h2>You are closer to the goal on:</h2>
       <ul>
-        <TimerItem><Clock>{ hours }</Clock>hours</TimerItem>
-        <TimerItem><Clock>{ minutes }</Clock>minutes</TimerItem>
-        <TimerItem><Clock>{ seconds }</Clock>seconds</TimerItem>
+        <TimerItem><Clock>{ hours }</Clock><TimeColor>hours</TimeColor></TimerItem>
+        <TimerItem><Clock>{ minutes }</Clock><TimeColor>minutes</TimeColor></TimerItem>
+        <TimerItem><Clock>{ seconds }</Clock><TimeColor>seconds</TimeColor></TimerItem>
       </ul>
 
       <IconContext.Provider value={{size: '24px'}}>
@@ -74,7 +74,7 @@ export const Timer = ({ onClick }) => {
         </BoxButton>
       </IconContext.Provider>     
     </Container>
-  </Section>
+  </Section>);
 }
 
 Timer.propTypes = {

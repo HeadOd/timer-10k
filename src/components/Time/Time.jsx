@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Section, Container } from "../Global/Global.styled";
+import { Section, Container, TimeColor } from "../Global/Global.styled";
 import { addLeadingZero } from "../Global/addLeadingZero";
 import { TimeItem, Clock } from "./Time.styled";
 
@@ -35,15 +35,15 @@ export const Time = ({ count }) => {
     } 
   }, [expertTime]);
 
-  return  <Section>
+  return  (<Section>
     <Container>  
       <h1>You will become a professional through:</h1>
       <ul>
-        <TimeItem><Clock>{ days }</Clock>days</TimeItem>
-        <TimeItem><Clock>{ hours }</Clock>hours</TimeItem>
-        <TimeItem><Clock>{ minutes }</Clock>minutes</TimeItem>
-        <TimeItem><Clock>{ seconds }</Clock>seconds</TimeItem>
+        <TimeItem><Clock>{ days }</Clock><TimeColor>days</TimeColor></TimeItem>
+        <TimeItem><Clock>{ hours }</Clock><TimeColor>hours</TimeColor></TimeItem>
+        <TimeItem><Clock>{ minutes }</Clock><TimeColor>minutes</TimeColor></TimeItem>
+        <TimeItem><Clock>{ seconds }</Clock><TimeColor>seconds</TimeColor></TimeItem>
       </ul>
     </Container>
-  </Section>
+  </Section>);
 }
